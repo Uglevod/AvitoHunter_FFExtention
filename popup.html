@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avito Hunter</title>
+    <style>
+        body {
+            width: 350px;
+            min-height: 400px;
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            margin: 0 0 20px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #da190b;
+            transform: translateY(-2px);
+        }
+
+        .btn-donate {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .btn-donate:hover {
+            background: linear-gradient(135deg, #ee5a24, #ff6b6b);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-donate:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .status.error {
+            background: rgba(244, 67, 54, 0.3);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
+
+        .status.info {
+            background: rgba(33, 150, 243, 0.3);
+            border: 1px solid rgba(33, 150, 243, 0.5);
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 5px;
+        }
+
+        .stats {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .stats-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .counter {
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .counter.updated {
+            transform: scale(1.1);
+            color: #4CAF50;
+        }
+
+        .stats-title {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Avito Hunter</h1>
+        
+        <div class="form-group">
+            <label for="botToken">Токен Telegram бота:</label>
+            <input type="text" id="botToken" placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz">
+            <div class="help-text">Получите токен у @BotFather в Telegram</div>
+        </div>
+
+        <div class="form-group">
+            <label for="chatId">ID чата Telegram:</label>
+            <input type="text" id="chatId" placeholder="@username или -1001234567890">
+            <div class="help-text">ID чата куда отправлять уведомления</div>
+        </div>
+
+     
+
+        <div class="button-group">
+            <button id="startBtn" class="btn-primary">▶️ Запустить</button>
+            <button id="stopBtn" class="btn-secondary">⏹️ Остановить</button>
+        </div>
+
+        <!-- Скрытые кнопки для изменения интервала -->
+        <div class="button-group" style="display: none;">
+            <button id="interval1" class="btn-secondary" data-interval="1">1 мин</button>
+            <button id="interval5" class="btn-secondary" data-interval="5">5 мин</button>
+            <button id="interval10" class="btn-secondary" data-interval="10">10 мин</button>
+            <button id="interval30" class="btn-secondary" data-interval="30">30 мин</button>
+            <button id="interval60" class="btn-secondary" data-interval="60">1 час</button>
+        </div>
+
+        <div class="button-group">
+            <button id="testTelegramBtn" class="btn-secondary" style="background: #2196F3;">📤 Тест Telegram</button>
+        </div>
+
+        <div class="button-group">
+            <a href="https://yoomoney.ru/fundraise/1DEGKKQO7NS.251016" target="_blank" rel="noopener noreferrer" class="btn-donate">
+                💝 Donate
+            </a>
+        </div>
+
+        <div id="status" class="status" style="display: none;"></div>
+
+        <div id="stats" class="stats" style="display: none;">
+            <div class="stats-item">
+                <span class="stats-title">Элементов в кеше:</span>
+                <span id="cachedItems" class="counter">0</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-title">Сообщений в Telegram:</span>
+                <span id="telegramMessages" class="counter">0</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-title">Последнее обновление:</span>
+                <span id="lastUpdate">-</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
