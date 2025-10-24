@@ -1,4 +1,7 @@
+
 <img width="1008" height="865" alt="image" src="https://github.com/user-attachments/assets/b9095e19-ccbf-4d96-a2d2-cb86b95198e3" />
+![photo_2025-10-24_11-41-58](https://github.com/user-attachments/assets/63e19e4e-449f-4d58-bcb5-896a7ef3ec68)
+
 
 Hi
 Это простой авито охотник,
